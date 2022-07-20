@@ -1,0 +1,59 @@
+@extends('layouts.dashboard')
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-lg-6 col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Tambah Data Mahasiswa</h3>
+                        <div class="card-tools">
+                            <a href="/admin" class="btn btn-sm btn-danger">
+                                Kembali
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if (count($errors) > 0)
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-warning">{{ $error }}</div>
+                            @endforeach
+                        @endif
+                        @if ($message = Session::get('error'))
+                            <div class="alert alert-warning">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        <form action="{{ route('mahasiswa.store') }}" method='POST'>
+                            @csrf
+                            <div class="form-group">
+                                <label for="nama">Nama</label>
+                                <input type="text" name="nama" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="nim">NIM</label>
+                                <input type="text" name="nim" id="nim" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                <input type="text" name="alamat" id="alamat" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="telp">telp</label>
+                                <input type="text" name="telp" id="telp" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="reset" class="btn btn-warning">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
